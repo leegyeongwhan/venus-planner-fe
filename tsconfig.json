@@ -5,6 +5,9 @@
       "@domain/*": [
         "src/domain/*"
       ],
+      "@constant/*": [
+        "src/constant/*"
+      ],
     },
 
     "target": "ES2020",

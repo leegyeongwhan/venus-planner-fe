@@ -8,6 +8,9 @@
       "@constant/*": [
         "src/constant/*"
       ],
+      "@utill/*": [
+        "src/utill/*"
+      ],
     },
 
     "target": "ES2020",

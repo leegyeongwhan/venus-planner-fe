@@ -17,7 +17,7 @@ export default function SignInCallbackPage() {
 
     signIn(code).then(isSuccess => {
       if (isSuccess) {
-        navigate(ROUTER_PATH.PLANNER.MAIN);
+        navigate(ROUTER_PATH.MAIN);
       } else {
         navigate(ROUTER_PATH.AUTH.SIGN_IN);
       }

@@ -8,7 +8,7 @@ export default function SignInPage() {
     <div className="flex flex-col justify-center items-center h-screen">
       <div className="card w-96 bg-base-200 flex justify-center items-center">
         <button className="btn btn-neutral btn-wide" onClick={goToGithub}>
-          Github Login
+          Github SignIn
         </button>
       </div>
     </div>

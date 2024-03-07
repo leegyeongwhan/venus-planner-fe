@@ -1,11 +1,18 @@
 import { ROUTER_PATH } from "@constant/RouterPath";
 import { useStudyStore } from "@domain/study/store/StudyStore";
 import { Study } from "@domain/study/type/Study";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function SideBarStudyTree() {
-  const { studies } = useStudyStore();
+  const { studies, isStudiesFetched, fetchStudies } = useStudyStore();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isStudiesFetched) {
+      fetchStudies();
+    }
+  }, [studies]);
 
   const fn_goToPlannerPage = (studyId: number) => {
     navigate(ROUTER_PATH.STUDY.PLANNER_$(studyId));

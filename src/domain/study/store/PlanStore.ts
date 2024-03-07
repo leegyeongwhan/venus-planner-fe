@@ -1,17 +1,19 @@
 import { API_PATH } from "@constant/ApiPath";
 import authAxios from "@utill/AuthAxios";
 import { create } from "zustand";
-import { Plan } from "@domain/study/type/Plan";
+import { Plan, PlanEvent } from "@domain/study/type/Plan";
 
 type PlanStoreType = {
   plans: Plan[];
   isPlansFetched: boolean;
+  planEvents: PlanEvent[];
   fetchPlans: (studyId: number) => void;
 };
 
 export const usePlanStore = create<PlanStoreType>((set) => ({
   plans: [],
   isPlansFetched: false,
+  planEvents: [],
   fetchPlans: (studyId: number) => {
     authAxios
       .get(API_PATH.STUDY.PLAN.GET_ALL(studyId))
@@ -21,10 +23,27 @@ export const usePlanStore = create<PlanStoreType>((set) => ({
           return;
         }
 
-        set({ 
-          plans: response.data,
+        let plans = response.data;
+        let planEvents = fn_convertPlansToPlannerFormat(plans);
+
+        set({
+          plans: plans,
+          planEvents: planEvents,
           isPlansFetched: true,
         });
       });
   },
 }));
+
+const fn_convertPlansToPlannerFormat = (plans: Plan[]): PlanEvent[] => {
+  return plans.map((plan) => ({
+    id: plan.planId.toString(),
+    title: plan.title,
+    description: plan.description,
+    start: plan.startTime.toString(),
+    end: plan.endTime.toString(),
+    textColor: "white",
+    backgroundColor: "blue",
+    display: "block",
+  }))
+};

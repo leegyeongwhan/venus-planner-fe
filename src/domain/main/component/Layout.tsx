@@ -3,7 +3,6 @@ import { useAuthMemberStore } from "@domain/auth/store/AuthMemberStore";
 import { ReactNode, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "./header/Header";
-import { useStudyStore } from "@domain/study/store/StudyStore";
 import SideBar from "./sidebar/SideBar";
 
 type Props = {
@@ -15,19 +14,12 @@ type Props = {
 
     const navigate = useNavigate();
     const { isSignIn } = useAuthMemberStore();
-    const { studies, isStudiesFetched, fetchStudies } = useStudyStore();
   
     useEffect(() => {
       if (!isSignIn()) {
         navigate(ROUTER_PATH.AUTH.SIGN_IN);
       }
     }, []);
-
-    useEffect(() => {
-      if (!isStudiesFetched) {
-        fetchStudies();
-      }
-    }, [studies]);
 
     return (
       <div className="drawer lg:drawer-open">

@@ -4,10 +4,12 @@ import interactionPlugin from "@fullcalendar/interaction";
 import { useParams } from "react-router-dom";
 import { usePlanStore } from "../store/PlanStore";
 import { useEffect } from "react";
+import { useDrawerStore } from "@domain/main/type/DrawerStore";
 
 export default function PlannerCalendar() {
   const { studyId } = useParams();
   const { plans, planEvents, fetchPlans, isPlansFetched } = usePlanStore();
+  const isDrawerOpen = useDrawerStore(state => state.isDrawerOpen);
 
   useEffect(() => {
     if (!isPlansFetched) {

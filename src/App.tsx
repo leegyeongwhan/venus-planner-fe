@@ -13,9 +13,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path={ROUTER_PATH.MAIN} 
-            element={<Layout title={'메인 페이지'}><MainPage /></Layout>} />
+            element={<Layout><MainPage /></Layout>} />
           <Route path={ROUTER_PATH.STUDY.PLANNER} 
-            element={<Layout title={'플래너'}><PlannerMainPage /></Layout>} />
+            element={<Layout><PlannerMainPage /></Layout>} />
           <Route path={ROUTER_PATH.AUTH.SIGN_IN} element={<SignInPage />} />
           <Route path={ROUTER_PATH.AUTH.CALLBACK} element={<SignInCallbackPage />} />
         </Routes>

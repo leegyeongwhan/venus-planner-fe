@@ -1,6 +1,7 @@
 import { ROUTER_PATH } from "@constant/RouterPath";
 import { useNavigate } from "react-router-dom";
 import SideBarStudyTree from "./SideBarStudyTree";
+import SideBarLogo from "./SideBarLogo";
 
 export default function SideBarMenu() {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ export default function SideBarMenu() {
 
   return (
     <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content gap-2">
+      <SideBarLogo />
       <li>
         <a
           className="btn btn-success text-lg"

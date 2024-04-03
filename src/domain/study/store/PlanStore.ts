@@ -7,24 +7,30 @@ type PlanStoreType = {
   plans: Plan[];
   isPlansFetched: boolean;
   planEvents: PlanEvent[];
-  fetchPlans: (studyId: number) => void;
+  fetchPlans: (studyId: number, start: Date, end: Date) => void;
 };
 
 export const usePlanStore = create<PlanStoreType>((set) => ({
   plans: [],
   isPlansFetched: false,
   planEvents: [],
-  fetchPlans: (studyId: number) => {
+  fetchPlans: (studyId: number, start: Date, end: Date) => {
+    set({
+      plans: [],
+      planEvents: [],
+      isPlansFetched: false,
+    });
+
     authAxios
-      .get(API_PATH.STUDY.PLAN.GET_ALL(studyId))
+      .get(API_PATH.STUDY.PLAN.GET_ALL(studyId, start, end))
       .then(function (response) {
         if (response.status !== 200) {
           alert("응답 실패입니다.");
           return;
         }
 
-        let plans = response.data;
-        let planEvents = fn_convertPlansToPlannerFormat(plans);
+        const plans = response.data;
+        const planEvents = fn_convertPlansToPlannerFormat(plans);
 
         set({
           plans: plans,
